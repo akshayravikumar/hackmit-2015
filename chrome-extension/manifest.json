@@ -7,15 +7,12 @@
 	    "matches": [
 	      "<all_urls>"
 	    ],
-	    "js": ["jquery.min.js","soundcloud.js", "content.js"]
+	    "js": ["jquery.min.js","soundmanager2.js", "audiomanager.js", "soundcloud.js", "content.js"]
 	  }
 	],
 	"browser_action": {
 	  "default_icon": "icon.png",
       "default_popup": "popup.html"
-	},
-	"permissions": [
-        "http://www.domain.com/*"
-    ]
+	}
 }
 
