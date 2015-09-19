@@ -7,7 +7,7 @@
 	    "matches": [
 	      "<all_urls>"
 	    ],
-	    "js": ["soundcloud.js", "content.js"]
+	    "js": ["jquery.min.js","soundcloud.js", "content.js"]
 	  }
 	],
 	"browser_action": {
