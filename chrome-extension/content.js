@@ -1,6 +1,3 @@
-console.log("hi");
-t = $('body').text();
-console.log(t);
 // $('body').append(t);
 
 SC.initialize({
@@ -8,6 +5,27 @@ SC.initialize({
 });
 
 // stream track id 293
-SC.stream("/tracks/293", function(sound){
-  sound.play();
+// SC.stream("/tracks/293", function(sound){
+//   sound.play();
+// });
+
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     // console.log(sender.tab ?
+//     //             "from a content script:" + sender.tab.url :
+//     //             "from the extension");
+//     if (request.greeting === "hello")
+//       sendResponse({farewell: "goodbye"});
+//   });
+
+chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
+	console.log(response);
+  	if (response.message === false) {
+  		chrome.runtime.sendMessage({message: "musicStarted"}, function(response) {
+	  		SC.stream("/tracks/293", function(sound){ 
+			  	sound.play();
+			  });
+		});
+  	} 
+  	return;
 });
