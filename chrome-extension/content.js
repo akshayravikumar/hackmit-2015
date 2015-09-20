@@ -1,6 +1,5 @@
 console.log("hi");
-t = $('body').text();
-console.log(t);
+
 //$('body').append(t);
 
 SC.initialize({
@@ -21,17 +20,21 @@ SC.stream("/tracks/293", function(sound){
 chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 	// console.log(response);
   	if (response.message === false) {
-
+  		var text = $("body").text();
 		var xhr = new XMLHttpRequest();
-
-		xhr.open("GET", "http://play-hackmit.rhcloud.com/", false);
+ 		xhr.open("GET", "http://play-hackmit.rhcloud.com/content/?content=" + text, false);
 		xhr.send();
-
 		var result = xhr.responseText;
+		// $.get( "http://play-hackmit.rhcloud.com/", { name: "John", time: "2pm" } )
+		//   .done(function( data ) {
+		//   	console.log(data);
+		//     // alert( "Data Loaded: " + data );
+		//   });
+
 		console.log(result);
   		chrome.runtime.sendMessage({message : "musicStarted"}, function(response) {
   			SC.get('/tracks', {tags: result}, function(tracks) {
-  				console.log(tracks)
+  				console.log(tracks);
 		  		SC.stream("/tracks/" + tracks[0].id, function(sound){ 
  				  	sound.play(function() {
 				  		alert("hui");
