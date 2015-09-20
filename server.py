@@ -12,11 +12,9 @@ def home():
 
 @app.route("/content/")
 def process():
-  if (request.args.get('content')):
-    songs = process_content(request.args.get('content'))
-  else:
-    songs = "Hello World!"
+  print request.args.get('content')
+  songs = process_content(request.args.get('content'))
   return str(songs)
 
 if __name__ == "__main__":
-  app.run()
+  app.run(debug=True)
