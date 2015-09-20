@@ -10,10 +10,11 @@ def process_content(content):
 def home():
   return "Hello World!" 
 
-@app.route("/content/")
+@app.route("/content/", methods = ["POST"])
 def process():
-  if (request.args.get('content')):
-    songs = process_content(request.args.get('content'))
+  print request.data
+  if (request.form['content']):
+    songs = process_content(request.form['content'])
   else:
     songs = "Hi"
   return str(songs)
