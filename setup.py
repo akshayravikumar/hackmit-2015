@@ -8,10 +8,12 @@ setup(
   author_email     = '',
   url              = 'http://www.python.org/sigs/distutils-sig/',
   packages         = [
+    'processing'
   ],
   install_requires = [
     'flask == 0.10.1',
-    'requests == 2.7.0'
+    'requests == 2.7.0',
+    'indicoio == 0.9.2'
   ]
 )
 
