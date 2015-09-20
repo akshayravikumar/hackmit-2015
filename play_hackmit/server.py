@@ -54,7 +54,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 def process_content(content, images):
-  return chooseSong(content, images)
+  return chooseSong(content)
 
 @app.route("/")
 def home():
@@ -63,6 +63,7 @@ def home():
 @app.route("/content/", methods = ["POST"])
 @crossdomain(origin='*')
 def process():
+  print "HELLO HELLO HELLO"
   songs_img = None
   if (request.form['content']):
     songs_txt = request.form['content']

@@ -20,7 +20,7 @@ def full_process(keywords):
 		    if (result[j][2] < result[i][2]):
 			    temp = result[j][2]
 			    result[j][2] = result[i][2]
-			    result[i][2] = temp    
+			    result[i][2] = temp
     return result[:10]
 
 def process(keywords):
@@ -33,6 +33,7 @@ def process(keywords):
     result = result.json()
     dictionary = []
     for i in range(0, len(result['tracks']['items'])):
-        dictionary.append([result['tracks']['items'][i]['name'],result['tracks']['items'][i]['artists'][0]['name'], result['tracks']['items'][i]['popularity']])
+        dictionary.append([result['tracks']['items'][i]['name'],result['tracks']['items'][i]['artists'][0]['name'], result['tracks']['items'][i]['popularity'],
+          result['tracks']['items'][i]['id']])
     return dictionary
 
