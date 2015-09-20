@@ -18,8 +18,13 @@ def getTagsFromImages(images):
     return ans
 
 
-def chooseSong(text):
+def chooseSong(text, images):
     keywords = identify.identify_keywords(text)
+    answers = getTagsFromImages(images)
+    for key in answers:
+        if (key in keywords):
+            keywords[key] += answers[key]
+        keywords[key] = answers[key]
     wordlist = sorted(keywords.keys(), key = lambda x : keywords[x])
     wordlist = wordlist[:10]
     songs = spotify.full_process(wordlist)
