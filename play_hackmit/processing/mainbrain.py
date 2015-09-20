@@ -11,12 +11,12 @@ def getTagsFromImages(images):
     clarifai_api = ClarifaiApi() # assumes environment variables are set.
     ans = []
     y = clarifai_api.tag_image_urls(images)
-    a = [x["result"]["tag"]["classes"] for x in y["results"]]
-    y = set()
-    for i in a:
-        for x in i:
-            y.add(x)
-    return list(y)
+    ans = {}
+    for x in y["results"]:
+        for i in range(len(x["result"]["tag"]["classes"])):
+            ans[x["result"]["tag"]["classes"][i]] = x["result"]["tag"]["probs"][i]/3
+    return ans
+
 
 def chooseSong(text):
     keywords = identify.identify_keywords(text)
