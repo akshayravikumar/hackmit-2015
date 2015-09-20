@@ -14,7 +14,7 @@ def home():
   return "Hello World!" 
 
 @app.route("/content/", methods = ["POST"])
-@crossdomain(origin='*')
+# @crossdomain(origin='*')
 def process():
   print request.data
   songs = "Hi"
