@@ -1,5 +1,6 @@
 import requests
-def fullprocess(keywords):
+
+def full_process(keywords):
     result = []
     for i in range(0, len(keywords)):
         temp = []
@@ -23,6 +24,7 @@ def fullprocess(keywords):
                 result[j] = temp
     result = result[:10]
     return result
+
 def process(keywords):
     query = "";
     for i in range(0, len(keywords)):
@@ -35,4 +37,4 @@ def process(keywords):
     for i in range(0, len(result['tracks']['items'])):
         dictionary.append([result['tracks']['items'][i]['name'],result['tracks']['items'][i]['artists'][0]['name'], result['tracks']['items'][i]['popularity']])
     return dictionary
-    
+
