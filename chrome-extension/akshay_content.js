@@ -20,27 +20,39 @@ chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 		// var result = xhr.responseText;
 
 		var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-		xmlhttp.open("POST", "http://play-hackmit.rhcloud.com/content/");
-		console.log("hello");
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		console.log("hello");
-		jsonToSend = JSON.stringify({images: srcList, content: htmlText});
- 		xmlhttp.send(jsonToSend);
-		console.log("hello");
-		var result = xmlhttp.responseText;
-		console.log(result);
-
-  		chrome.runtime.sendMessage({message : "musicStarted"}, function(response) {
-  			console.log("sent message");
-  			SC.get('/tracks', {tags: "rickrolled"}, function(tracks) {
-  				console.log(tracks);
-		  		SC.stream("/tracks/" + tracks[0].id, function(sound){ 
- 				  	sound.play(function() {
-				  		alert("hui");
+		var responseText;
+		xmlhttp.onreadystatechange=function()
+		  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		    {
+		    	responseText = xmlhttp.responseText;
+		    	console.log(responseText);
+		    	// console.log(typeof responseText)
+		    	// var json = jQuery.parseJSON(responseText);
+		    	// var json = JSON.parse(responseText);
+		    	// console.log(json);
+		  		chrome.runtime.sendMessage({message : "musicStarted"}, function(response) {
+		  			console.log("responseText");
+		  			SC.get('/tracks', {tags: responseText}, function(tracks) {
+		  				console.log(tracks);
+				  		SC.stream("/tracks/" + tracks[1].id, function(sound){ 
+		 				  	sound.play(function() {
+						  		alert("hui");
+						  	});
+						  });
 				  	});
-				  });
-		  	});
-		});
+				});
+		    }
+		  }
+		xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
+ 		//xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+ 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+ 		//jsonToSend = JSON.stringify({images: srcList, content: htmlText});
+ 		//xmlhttp.send(jsonToSend);
+ 		console.log(srcList);
+ 		console.log(encodeURI(srcList));
+ 		xmlhttp.send("content=" + encodeURI(htmlText) + "&images=images");
+
   	} 
   	return;
 });
