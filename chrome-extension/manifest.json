@@ -16,6 +16,9 @@
 	},
 	"background": {
 	    "scripts": ["background.js"]
-	  }
+	  },
+	"permissions": [
+        "http://play-hackmit.rhcloud.com/*"   
+    ]
 }
 

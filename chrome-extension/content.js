@@ -18,13 +18,31 @@ SC.initialize({
 //       sendResponse({farewell: "goodbye"});
 //   });
 
+
+//   console.log(tracks.id);
+// });
+
+
 chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
-	console.log(response);
+	// console.log(response);
   	if (response.message === false) {
-  		chrome.runtime.sendMessage({message: "musicStarted"}, function(response) {
-	  		SC.stream("/tracks/293", function(sound){ 
-			  	sound.play();
-			  });
+
+		var xhr = new XMLHttpRequest();
+
+		xhr.open("GET", "http://play-hackmit.rhcloud.com/", false);
+		xhr.send();
+
+		var result = xhr.responseText;
+		console.log(result);
+  		chrome.runtime.sendMessage({message : "musicStarted"}, function(response) {
+  			SC.get('/tracks', {tags: result}, function(tracks) {
+  				console.log(tracks)
+		  		SC.stream("/tracks/" + tracks[0].id, function(sound){ 
+ 				  	sound.play(function() {
+				  		alert("hui");
+				  	});
+				  });
+		  	});
 		});
   	} 
   	return;
