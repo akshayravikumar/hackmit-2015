@@ -1,6 +1,3 @@
-// SC.initialize({
-//   client_id: 'bdc283e42a80983fd9bea0fa8871be8a'
-// });
 
 chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 	console.log(response);
@@ -27,30 +24,20 @@ chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 		  			iframe.setAttribute("position", "relative");
  					iframe.src = "https://embed.spotify.com/?uri=spotify:track:" + responseText;
 					document.body.appendChild(iframe);
-		  			//var iframes = document.getElementsByTagName('iframe');
-					//for (var i = 0; i < iframes.length; i++) {
-					//    iframes[i].parentNode.removeChild(iframes[i]);
-					//}
-		  			// .getElementById("spotify_frame").src = "https://embed.spotify.com/?uri=spotify:track:" + responseText;
-		  			// $("#spotify_frame").src = 
-		  			// SC.get('/tracks', {tags: responseText}, function(tracks) {
-		  			// 	console.log(tracks);
-				  	// 	SC.stream("/tracks/" + tracks[1].id, function(sound){ 
-		 				//   	sound.play(function() {
-						 //  		alert("hui");
-						 //  	});
-						 //  });
-				  	// });
 				});
 		    }
 		  }
 		xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
  		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
  		console.log(srcList);
- 		console.log(encodeURI(srcList));
- 		xmlhttp.send("content=" + encodeURI(htmlText) + "&images=images");
+ 		console.log(encodeURIComponent(srcList));
+    thing = encodeURIComponent(srcList)
+    if(srcList.length == 0){
+      thing = ""
+    }
+ 		xmlhttp.send("content=" + encodeURIComponent(htmlText) + "&images=" + thing);
 
-  	} 
+  	}
   	return;
 });
 

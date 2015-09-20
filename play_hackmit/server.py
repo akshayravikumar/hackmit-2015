@@ -53,11 +53,8 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 
-def process_content(content):
-  return chooseSong(content)
-
-def process_images(images):
-  return str(images)
+def process_content(content, images):
+  return chooseSong(content, images)
 
 @app.route("/")
 def home():
@@ -66,15 +63,17 @@ def home():
 @app.route("/content/", methods = ["POST"])
 @crossdomain(origin='*')
 def process():
-  print request.data
-  songs = "Hi"
+  songs_img = None
   if (request.form['content']):
-    songs_txt = process_content(request.form['content'])
+    songs_txt = request.form['content']
   if (request.form['images']):
-    songs_img = process_images(request.form['images'])
-  # songs = {"content": songs_txt, "images":songs_img}
-  # songs = {"content": songs_txt}
-  return str(songs_txt)
+    songs_img = request.form['images']
+  if songs_img == None:
+    songs_img = []
+  else:
+    songs_img = songs_img.split(',')
+  song = process_content(songs_txt, songs_img)
+  return str(song)
 
 if __name__ == "__main__":
   app.run(debug=True)
