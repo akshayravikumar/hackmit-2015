@@ -1,31 +1,24 @@
 console.log("hi");
-t = $('body').text();
-console.log(t);
+
 //$('body').append(t);
 
 SC.initialize({
   client_id: 'bdc283e42a80983fd9bea0fa8871be8a'
 });
 
-// stream track id 293
 
-SC.stream("/tracks/293", function(sound){
-  sound.play();
-});
-
-
-//   console.log(tracks.id);
-// });
 
 
 chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 	// console.log(response);
+    console.log("hi");
   	if (response.message === false) {
 
 		var xhr = new XMLHttpRequest();
 
-		xhr.open("GET", "http://play-hackmit.rhcloud.com/", false);
-		xhr.send();
+		xhr.open("GET", "http://play-hackmit.rhcloud.com/content/", false);
+		xhr.setRequestHeader("Content", "asdfasdfasdfasdf");
+    xhr.send(null);
 
 		var result = xhr.responseText;
 		console.log(result);
