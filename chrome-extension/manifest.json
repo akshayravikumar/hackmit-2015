@@ -15,7 +15,7 @@
       "default_popup": "popup.html"
   },
   "background": {
-      "scripts": ["new_background.js"]
+      "scripts": ["jquery.min.js","new_background.js"]
     },
   "permissions": [
         "http://play-hackmit.rhcloud.com/*",

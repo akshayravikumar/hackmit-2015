@@ -1,6 +1,7 @@
 musicPlaying = false;
 tabPlaying = "";
 
+// document.getElementById("spotify_frame").remove();
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     // console.log(sender);
