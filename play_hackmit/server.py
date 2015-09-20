@@ -1,5 +1,5 @@
 from flask import Flask, request
-from processing.identify_keywords import identify_keywords
+from processing.mainbrain import chooseSong
 app = Flask(__name__)
 
 
@@ -53,13 +53,8 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 
-
-
-
-
 def process_content(content):
-  x = identify_keywords(content)
-  return ",".join([str(y) for y in x.keys()])
+  return chooseSong(content)
 
 def process_images(images):
   return str(images)
