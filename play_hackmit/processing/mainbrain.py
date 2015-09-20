@@ -30,7 +30,8 @@ def chooseSong(text, images):
     for key in answers:
         if (key in keywords):
             keywords[key] += answers[key]
-        keywords[key] = answers[key]
+        else:
+	    keywords[key] = answers[key]
     wordlist = sorted(keywords.keys(), key = lambda x : keywords[x])
     wordlist = wordlist[:10]
     songs = spotify.full_process(wordlist)
