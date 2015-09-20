@@ -1,8 +1,10 @@
 from flask import Flask, request
+from processing.identify_keywords import identify_keywords
 app = Flask(__name__)
 
 def process_content(content):
-  return len(content)
+  x = identify_keywords(content)
+  return x.keys()
 
 @app.route("/")
 def home():
