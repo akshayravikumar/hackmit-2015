@@ -31,7 +31,6 @@ def chooseSong(text, images):
         if (key in keywords):
             keywords[key] += answers[key]
         keywords[key] = answers[key]
->>>>>>> 872ab0a19dafc5f90c2b8d0a571d7851ebb0ea6c
     wordlist = sorted(keywords.keys(), key = lambda x : keywords[x])
     wordlist = wordlist[:10]
     songs = spotify.full_process(wordlist)
