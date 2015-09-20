@@ -8,9 +8,9 @@ SC.initialize({
 
 // stream track id 293
 
-SC.stream("/tracks/293", function(sound){
-  sound.play();
-});
+// SC.stream("/tracks/293", function(sound){
+//   sound.play();
+// });
 
 
 //   console.log(tracks.id);
