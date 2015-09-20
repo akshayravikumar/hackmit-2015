@@ -1,5 +1,4 @@
 import requests
-
 def full_process(keywords):
     result = []
     for i in range(0, len(keywords)):
@@ -16,14 +15,13 @@ def full_process(keywords):
             tempo = process(temp)
             for k in range(0, len(tempo)):
                 result.append(tempo[k])
-    for i in range(0, len(result)):
-        for j in range(i + 1, len(result)):
-            if (result[j][2] > result[i][2]):
-                temp = result[i]
-                result[i] = result[j]
-                result[j] = temp
-    result = result[:10]
-    return result
+    for i in range(0, len(keywords)):
+	    for j in range(i + 1, len(keywords)):
+		    if (result[j][2] < result[i][2]):
+			    temp = result[j][2]
+			    result[j][2] = result[i][2]
+			    result[i][2] = temp    
+    return result[:10]
 
 def process(keywords):
     query = "";
