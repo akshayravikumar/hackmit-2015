@@ -21,7 +21,7 @@ def keylyrics(name, artist):
 def computeSong(songs, keywords):
     maxval = 0
     for song in songs:
-        num = 25*match(keylyrics(song[0], song[1]), keywords) + song[2]
+        num = 10*match(keylyrics(song[0], song[1]), keywords) + song[2]
         if (num > maxval):
             maxval = num
             final = song

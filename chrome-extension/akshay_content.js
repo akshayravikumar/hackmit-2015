@@ -1,7 +1,7 @@
 
 chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 	console.log(response);
-  	if (response.message === false) {
+  	if (response.message !== undefined) {
   		console.log("ready to play");
   		var images = document.getElementsByTagName('img'); 
 		var srcList = [];
@@ -19,15 +19,20 @@ chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 		    	console.log(responseText);
 		  		chrome.runtime.sendMessage({message : "musicStarted"}, function(response) {
 		  			console.log(responseText);
+		  			var iframe_div = document.createElement('div');
+		  			iframe_div.setAttribute("style", "style='position:relative;min-width:960px'")
 		  			var iframe = document.createElement('iframe');
+		  			iframe_div.setAttribute("z-index", "9999");
 		  			iframe.setAttribute("z-index", "9999");
-		  			iframe.setAttribute("position", "relative");
+		  			iframe.setAttribute("style", "position: absolute;right:0;top:0");
  					iframe.src = "https://embed.spotify.com/?uri=spotify:track:" + responseText;
-					document.body.appendChild(iframe);
+					document.body.insertBefore(iframe_div, document.body.firstChild);
+					iframe_div.appendChild(iframe);
 				});
 		    }
 		  }
-		xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
+ 		xmlhttp.open("POST", "http://play-hackmit.rhcloud.com/content/", true);
+		//xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
  		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
  		console.log(srcList);
  		console.log(encodeURIComponent(srcList));

@@ -6,6 +6,7 @@ import indicoio
 from os import environ
 from lxml import html
 import requests
+import html2text
 
 def getTagsFromImages(images):
     clarifai_api = ClarifaiApi() # assumes environment variables are set.
@@ -22,13 +23,19 @@ def getTagsFromImages(images):
 
 
 def chooseSong(text, images):
+    text = html2text.html2text(text);
+    keywords = identify.identify_keywords(text)
+    print "\n\n\n\n\n"
+    print keywords
+    print "\n\n\n\n\n"
     keywords = identify.identify_keywords(text)
     answers = getTagsFromImages(images)
     for key in answers:
         if (key in keywords):
             keywords[key] += answers[key]
-        keywords[key] = answers[key]
-    wordlist = sorted(keywords.keys(), key = lambda x : keywords[x])
+        else:
+	       keywords[key] = answers[key]
+    wordlist = sorted(keywords.keys(), key = lambda x : -keywords[x])
     wordlist = wordlist[:10]
     songs = spotify.full_process(wordlist)
     song = scraper.computeSong(songs, keywords)
