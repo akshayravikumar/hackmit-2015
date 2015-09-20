@@ -1,5 +1,3 @@
-
-			  
 musicPlaying = false;
 tabPlaying = "";
 
@@ -9,7 +7,7 @@ chrome.runtime.onMessage.addListener(
     if (request.message == "isMusicPlaying") {
       // tabPlaying = sender.tab;
       sendResponse({message: musicPlaying, test: "test"});
-    } 
+    }
     if (request.message == "musicStarted") {
       musicPlaying = true;
       sendResponse({message : "okay"});
