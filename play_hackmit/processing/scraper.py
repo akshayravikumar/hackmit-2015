@@ -11,10 +11,8 @@ def keylyrics(name, artist):
     if (len(stuff["message"]["body"]["track_list"]) == 0):
         return []
     stuff = stuff["message"]["body"]["track_list"][0]["track"]["track_id"]
-    print stuff
     page = requests.get("http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=" + environ.get("MUSIX_API_KEY") + "&track_id=" + str(stuff))
     tree = page.json()
-    print tree
     if (tree["message"]["header"]["status_code"] == 404):
         return []
     lyrics = tree["message"]["body"]["lyrics"]["lyrics_body"]

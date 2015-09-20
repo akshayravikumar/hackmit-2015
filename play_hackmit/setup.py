@@ -14,6 +14,7 @@ setup(
     'flask == 0.10.1',
     'requests == 2.7.0',
     'indicoio == 0.9.2',
+    'clarifai == 0.2.0'
     'lxml == 3.4.4',
     'html2text == 2015.6.21'
   ]

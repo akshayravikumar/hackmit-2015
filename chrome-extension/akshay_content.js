@@ -48,7 +48,8 @@ chrome.runtime.sendMessage({message: "isMusicPlaying"}, function(response) {
 				});
 		    }
 		  }
-		xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
+ 		xmlhttp.open("POST", "http://play-hackmit.rhcloud.com/content/", true);
+		//xmlhttp.open("POST", "http://127.0.0.1:5000/content/"), true;
  		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
  		console.log(srcList);
  		console.log(encodeURI(srcList));
