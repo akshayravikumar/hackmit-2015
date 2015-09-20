@@ -13,7 +13,8 @@ setup(
   install_requires = [
     'flask == 0.10.1',
     'requests == 2.7.0',
-    'indicoio == 0.9.2'
+    'indicoio == 0.9.2',
+    'clarifai == 0.2.0'
   ]
 )
 
