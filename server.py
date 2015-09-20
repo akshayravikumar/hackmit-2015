@@ -1,6 +1,8 @@
 from flask import Flask, request
-from processing.mainbrain import chooseSong
+from processing.identify_keywords import identify_keywords
 app = Flask(__name__)
+
+
 
 from datetime import timedelta
 from flask import make_response, request, current_app
@@ -51,8 +53,16 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 
-def process_content(content, images):
-  return chooseSong(content)
+
+
+
+
+def process_content(content):
+  x = identify_keywords(content)
+  return ",".join([str(y) for y in x.keys()])
+
+def process_images(images):
+  return str(images)
 
 @app.route("/")
 def home():
@@ -61,18 +71,15 @@ def home():
 @app.route("/content/", methods = ["POST"])
 @crossdomain(origin='*')
 def process():
-  print "HELLO HELLO HELLO"
-  songs_img = None
+  print request.data
+  songs = "Hi"
   if (request.form['content']):
-    songs_txt = request.form['content']
+    songs_txt = process_content(request.form['content'])
   if (request.form['images']):
-    songs_img = request.form['images']
-  if songs_img == None:
-    songs_img = []
-  else:
-    songs_img = songs_img.split(',')
-  song = process_content(songs_txt, songs_img)
-  return str(song)
+    songs_img = process_images(request.form['images'])
+  # songs = {"content": songs_txt, "images":songs_img}
+  # songs = {"content": songs_txt}
+  return str(songs_txt)
 
 if __name__ == "__main__":
   app.run(debug=True)
