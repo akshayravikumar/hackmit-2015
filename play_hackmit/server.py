@@ -54,7 +54,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 def process_content(content):
-  return chooseSong(content)
+  return chooseSong(content, ["http://lifewallpaperz.com/images/2015/scenery/scenery-05.jpg"])
 
 def process_images(images):
   return str(images)
