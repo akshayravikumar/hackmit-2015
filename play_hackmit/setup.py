@@ -11,6 +11,7 @@ setup(
   ],
   install_requires = [
     'flask == 0.10.1',
+    'requests == 2.7.0'
   ]
 )
 
